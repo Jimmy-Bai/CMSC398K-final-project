@@ -1,0 +1,230 @@
+:root {
+  --main-text-primary: #f8f9fa;
+  --main-text-secondary: #495057;
+  --main-button-1: #0c8599;
+  --main-button-1-hover: #0b7285;
+  --main-button-2: #74b816;
+  --main-button-2-hover: #5c940d;
+  --main-button-3: #228be6;
+  --main-button-3-hover: #1c7ed6;
+  --main-button-4: #20c997;
+  --main-button-4-hover: #12b886;
+  --main-button-5: #e64980;
+  --main-button-5-hover: #be3e6b;
+  --main-button-active: #f8f9fa;
+  --error-toast-bg: #e64980;
+  --success-toast-bg: #74b816;
+  --warning-toast-bg: #fcc319;
+  --plain-toast-bg: #f8f9fa;
+  --navbar-bg: #343a40;
+  --active-island: #22b8cf;
+  --inactive-island: #fcc319;
+  --sub-island: #f8f9fa;
+  --dodo-box-bg: #0f9ab3;
+  --queue-list-title: #74b816;
+  --filter-title: #228be6;
+  --description-box-alpha: #f8f9fa79;
+}
+
+a, a:hover {
+  text-decoration: none !important;
+  color: var(--main-text-primary) !important;
+}
+
+body {
+  background-color: #214768 !important;
+  background-image: url('../img/Turnip.png');
+  background-repeat: repeat;
+  background-attachment: fixed;
+  background-size: 35%;
+  font-family: 'Nunito', sans-serif !important;
+}
+
+/* Font Weight and Size CSS */
+
+.f-700 {
+  font-weight: 700 !important;
+}
+
+.f-400 {
+  font-weight: 400 !important;
+}
+
+/* Other Persistent Elements CSSS */
+
+.box-shadow {
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.0125), 0 1px 1px rgba(0, 0, 0, 0.05);
+  border-top-width: .0625rem !important;
+  border-bottom-width: calc(.2rem + .0625rem) !important;
+}
+
+.borderless {
+  border: 0 !important;
+}
+
+.margin-custom-6 {
+  margin-top: 6rem !important;
+  margin-bottom: 6rem !important;
+}
+
+/* Title Block at Homepage CSS */
+
+.title-group, .title-group h1, .title-group h2 {
+  color: var(--main-text-primary) !important;
+  font-weight: 700 !important;
+}
+
+.title-group h1 {
+  font-size: 4rem;
+}
+
+.title-group h2 {
+  font-size: 2rem;
+}
+
+/* Alignment CSS */
+
+.vh-center {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Modal CSS */
+
+.modal-content {
+  color: var(--main-text-secondary);
+}
+
+.modal-title {
+  font-weight: 700;
+  font-size: 2.5rem;
+  margin: auto;
+  text-align: center;
+}
+
+.col-form-label {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.form-control {
+  box-shadow: inset 0 .25rem .125rem 0 rgba(0, 0, 0, 0.05);
+  border-width: .125rem;
+  padding: 1rem;
+  transition: all .1s ease-in-out;
+}
+
+.modal-header, .modal-footer {
+  border-bottom: 0 !important;
+  border-top: 0 !important;
+}
+
+.form-group {
+  margin-bottom: 0 !important;
+}
+
+.modal-dialog-centered, .modal-dialog-centered::before {
+  height: 0 !important;
+}
+
+/* Bootstrap Toast and Alert CSS */
+
+#container-toast {
+  top: 3rem;
+  right: 1em;
+}
+
+.toast-body {
+  word-wrap: anywhere;
+  font-weight: 600;
+}
+
+.toast-shape {
+  margin-bottom: .75rem !important;
+  border-radius: .25rem !important;
+  z-index: 1500 !important;
+}
+
+.success_toast, .success_alert {
+  color: var(--main-text-primary);
+  background: var(--success-toast-bg);
+  border-color: var(--success-toast-bg);
+}
+
+.error_toast, .error_alert {
+  color: var(--main-text-primary);
+  background: var(--error-toast-bg);
+  border-color: var(--error-toast-bg);
+}
+
+.warning_toast, .warning_alert {
+  color: var(--main-text-primary);
+  background: var(--warning-toast-bg);
+  border-color: var(--warning-toast-bg);
+}
+
+.plain_toast, .plain_alert {
+  color: var(--main-text-secondary) !important;
+  background: var(--plain-toast-bg);
+  border-color: var(--plain-toast-bg);
+}
+
+.close {
+  font-size: 1rem !important;
+  color: var(--main-text-primary) !important;
+  text-shadow: 0 0px 0 #fff !important;
+}
+
+/* Navbar CSS */
+
+.navbar-dark {
+  background-color: var(--navbar-bg);
+  box-shadow: 0 .25rem .125rem 0 rgba(0, 0, 0, 0.05);
+}
+
+.navbar-brand, .nav-item {
+  font-weight: 700;
+}
+
+.nav-item i, .navbar-brand i {
+  padding: .25rem;
+}
+
+.navbar {
+  z-index: 1200 !important;
+  position: fixed !important;
+  top: 0;
+  width: 100%;
+}
+
+/* Big Button CSS */
+
+.add-button-box {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  margin: 20px;
+  justify-content: center;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.add-button-box .add-button {
+  display: flex;
+  align-items: center;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  justify-content: inherit;
+  font-size: 32px;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  background: var(--main-button-4);
+  color: var(--main-text-primary) !important;
+}
+
+.add-button-box:hover .add-button {
+  background: var(--main-button-4-hover);
+}
+

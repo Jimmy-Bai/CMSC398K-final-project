@@ -1,0 +1,44 @@
+{{!-- Island Information Card --}}
+<div class="card 
+{{#if this.active}}active-island-card{{else}}inactive-island-card{{/if}} 
+{{#if this.fee_required}}fee-required{{else}}fee-not-required{{/if}} 
+mb-3">
+  <div class="card-body p-0">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-3 card-col card-col-left box-shadow">
+          <div class="text-center">
+            <div class="f-700 bell-price">{{this.bell_price}}</div>
+            <h5 class="card-title">/BELLS</h5>
+          </div>
+        </div>
+        <div class="col-lg-9 card-col card-col-right text-left box-shadow">
+          <h5 class="card-title f-700">Island ID: <a href="/island/{{this.island_uuid}}">{{this.island_uuid}}</a></h5>
+          <h5 class="card-title f-700">Starting at: {{this.start_time}}</h5>
+          <div class="d-flex">
+            <p class="card-text mr-auto">
+              <span class="f-700">Current queue size: </span>
+              <span>{{this.queue_list.length}}</span>/{{this.queue_limit}}
+            </p>
+            <p class="card-text mx-auto">
+              <span class="f-700">Visitor limit: </span>
+              <span>{{this.visitor_limit}}</span>
+            </p>
+            <p class="card-text mx-auto">
+              <span class="f-700">Fee: </span>
+              {{#if this.fee_required}}Yes{{else}}No{{/if}}
+            </p>
+            <p class="card-text ml-auto">
+              <span class="f-700">Active: </span>
+              {{#if this.active}}Yes{{else}}No{{/if}}
+            </p>
+          </div>
+          <p class="card-text f-700">Description:</p>
+          <div class="mt-1 description-box-alpha">
+            <p class="card-text">{{this.description}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

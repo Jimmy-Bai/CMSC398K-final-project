@@ -1,0 +1,89 @@
+{{!-- Navbar --}}
+{{>navbar}}
+<div class="container profile margin-custom-6">
+  <div class="card borderless">
+    <div class="card-body">
+      {{!-- Title --}}
+      <div class="row my-2 text-center">
+        <div class="col">
+          <h2 class="card-title f-700">About Page</h2>
+        </div>
+      </div>
+      {{!-- Infromation --}}
+      <div class="row my-2">
+        <div class="col">
+          <h5 class="card-title f-700">Information</h5>
+          <div class="description-box">
+            <p class="my-0">Author: Zicong (Jimmy) Bai</p>
+          </div>
+        </div>
+      </div>
+      {{!-- Description --}}
+      <div class="row my-2">
+        <div class="col">
+          <h5 class="card-title f-700">Description</h5>
+          <div class="description-box">
+            <p class="my-0">
+              Animal Crossing: New Horizon is a popular game that came out on the Nintendo Switch recently.
+              This website allow players to host island and invite other players to sell turnips on the host's island.
+              Since turnips' prices fluctuate, this website is called the "Stalk Market".
+            </p>
+          </div>
+        </div>
+      </div>
+      {{!-- Functionality --}}
+      <div class="row my-2">
+        <div class="col">
+          <h5 class="card-title f-700">How it work (Host)</h5>
+          <div class="description-box">
+            <p class="my-0">
+              1. Press the giant green button on bottom right corner of any page, except the about page.
+            </p>
+            <p class="my-0">
+              2. A form will pop up for you to fill out.
+            </p>
+            <p class="my-0">
+              3. Queue limit is how the total number of people you are willing to invite into the island (Enter a number
+              from 1 to 75).
+            </p>
+            <p class="my-0">
+              4. Visitor limit is how many people can visit your island at once (Enter a number from 1 to 6).
+            </p>
+            <p class="my-0">
+              5. Start date and time is when you will start sending people invite codes.
+            </p>
+            <p class="my-0">
+              6. Press 'Host Island' whenever you are ready!
+            </p>
+          </div>
+        </div>
+      </div>
+      {{!-- Functionality --}}
+      <div class="row my-2">
+        <div class="col">
+          <h5 class="card-title f-700">How it work (Client)</h5>
+          <div class="description-box">
+            <p class="my-0">
+              1. Look for an island to join.
+            </p>
+            <p class="my-0">
+              2. Click 'Join Island'. This will put you in to the queue. If you leave the queue, your current place on
+              the queue will be lost.
+            </p>
+            <p class="my-0">
+              3. When it is your turn, the Dodo code will be displayed and you can use that to enter the island.
+            </p>
+            <p class="my-0">
+              4. After visiting the island, you will not be able to join the queue of that island again.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{{!-- SCRIPTS --}}
+<script>
+  socket = io('/index');
+  currUserUuid = {{ uuid }};
+</script>

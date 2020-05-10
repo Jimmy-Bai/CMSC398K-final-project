@@ -1,0 +1,36 @@
+{{!-- Toast Container --}}
+<div class="position-absolute w-100 p-4 d-flex flex-column align-items-end" id="container-toast">
+  {{#each msg}}
+  <div class="toast ml-auto w-25" role="alert" data-delay="3000" data-autohide="true">
+    <button type="button" class="mx-2 my-1 close" data-dismiss="toast" aria-label="Close">
+      <i class="fas fa-times close-icon" aria-hidden="true"></i>
+    </button>
+    <div class="toast-body error_toast">
+      <strong>Error! </strong>{{this.msg}}
+    </div>
+  </div>
+  {{/each}}
+
+  {{#if flash.toast}}
+  <div class="toast ml-auto w-25" role="alert" data-delay="3000" data-autohide="true">
+    <button type="button" class="mx-2 my-1 close" data-dismiss="toast" aria-label="Close">
+      <i class="fas fa-times close-icon" aria-hidden="true"></i>
+    </button>
+    <div class="toast-body {{flash.type}}">
+      <strong>{{#if flash.success}}Success!{{else}}Error!{{/if}} </strong>
+      {{flash.toast}}
+    </div>
+  </div>
+  {{/if}}
+  {{#if auth_error.toast}}
+  <div class="toast ml-auto w-25" role="alert" data-delay="3000" data-autohide="true">
+    <button type="button" class="mx-2 my-1 close" data-dismiss="toast" aria-label="Close">
+      <i class="fas fa-times close-icon" aria-hidden="true"></i>
+    </button>
+    <div class="toast-body {{flash.type}}">
+      <strong>{{#if flash.success}}Success!{{else}}Error!{{/if}} </strong>
+      {{auth_error.toast}}
+    </div>
+  </div>
+  {{/if}}
+</div>

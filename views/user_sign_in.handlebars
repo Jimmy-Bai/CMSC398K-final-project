@@ -1,0 +1,38 @@
+<div class="container">
+  <div class="modal-dialog vh-center my-0" role="document">
+    <div class="modal-content">
+      {{!-- Modal Header --}}
+      <div class="modal-header mb-0">
+        <h5 class="modal-title">Sign In</h5>
+      </div>
+      {{!-- Modal Body --}}
+      <div class="modal-body py-0">
+        {{!-- <form method="POST" action="/user/register" onsubmit="return ValidateSignUpForm();" name="signup"> --}}
+        <form method="POST" action="/user/signin" name="signin">
+          {{!-- Notification Container --}}
+          {{>alert}}
+          {{!-- Username --}}
+          <div class="form-row">
+            <div class="form-group col">
+              <label class="col-form-label">Username</label>
+              <input type="text" class="form-control" name="username" placeholder="Username..."
+                value="{{#if username}}{{username}}{{/if}}" required>
+            </div>
+          </div>
+          {{!-- Password --}}
+          <div class="form-row">
+            <div class="form-group col">
+              <label class="col-form-label">Password</label>
+              <input type="password" class="form-control" name="password" placeholder="Password..." required>
+            </div>
+          </div>
+          {{!-- Modal Footer --}}
+          <div class="modal-footer px-0">
+            <button type="submit" class="button button-depth button-color-3">Sign In</button>
+            <a class="button button-depth button-color-2" href="/">Back</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

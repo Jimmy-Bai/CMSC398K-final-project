@@ -1,0 +1,86 @@
+/* Button CSS */
+
+.button {
+  font-size: 1.25rem;
+  font-weight: 700;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  border-radius: .5rem;
+  padding: 1rem;
+  flex-grow: 1;
+  vertical-align: middle;
+  text-align: center;
+  display: inline-block;
+  margin-bottom: 0;
+}
+
+.button i {
+  padding: .25rem;
+}
+
+.button-depth {
+  transition: color .1s ease-in-out, background-color .1s ease-in-out;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.0125), 0 1px 1px rgba(0, 0, 0, 0.05);
+  border-top-width: .0625rem !important;
+  border-bottom-width: calc(.2rem + .0625rem) !important;
+}
+
+.button-depth:active {
+  border-top-width: calc(.2rem + .0625rem) !important;
+  border-bottom-width: .0625rem !important;
+}
+
+.button-color-1 {
+  color: var(--main-text-primary);
+  background-color: var(--main-button-1);
+}
+
+.button-color-1:hover {
+  background-color: var(--main-button-1-hover);
+}
+
+.button-color-2 {
+  color: var(--main-text-primary);
+  background-color: var(--main-button-2);
+}
+
+.button-color-2:hover {
+  background-color: var(--main-button-2-hover);
+}
+
+.button-color-3 {
+  color: var(--main-text-primary);
+  background-color: var(--main-button-3);
+}
+
+.button-color-3:hover {
+  background-color: var(--main-button-3-hover);
+}
+
+.button-color-4 {
+  color: var(--main-text-primary);
+  background-color: var(--main-button-4);
+}
+
+.button-color-4:hover {
+  background-color: var(--main-button-4-hover);
+}
+
+.button-color-5 {
+  color: var(--main-text-primary);
+  background-color: var(--main-button-5);
+}
+
+.button-color-5:hover {
+  background-color: var(--main-button-5-hover);
+}
+
+.button-active:active, .button-active.active {
+  color: var(--main-text-secondary);
+  background-color: var(--main-button-active);
+}
+
+.button-review {
+  height: 40px;
+  padding: 0 .5rem 0 .5rem;
+  font-size: 1rem !important;
+}

@@ -1,0 +1,119 @@
+/* JQuery Date Picker CSS */
+th {
+  width: 30px;
+  text-align: center;
+}
+
+td a {
+  text-align: center !important;
+}
+
+.ui-datepicker-header, .ui-widget-header {
+  color: var(--main-text-secondary) !important;
+  border: 1px solid rgba(0, 0, 0, 0.3) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.0125), 0 1px 1px rgba(0, 0, 0, 0.05);
+  border-top-width: .0625rem !important;
+  border-bottom-width: calc(.2rem + .0625rem) !important;
+}
+
+.ui-widget-content {
+  color: var(--main-text-secondary) !important;
+  border: 1px solid rgba(0, 0, 0, 0.3) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.0125), 0 1px 1px rgba(0, 0, 0, 0.05);
+  border-top-width: .0625rem !important;
+  border-bottom-width: calc(.2rem + .0625rem) !important;
+}
+
+.ui-state-default, .ui-corner-all.ui-state-hover {
+  background-color: var(--main-button-active) !important;
+  color: var(--main-text-secondary) !important;
+  border: 1px solid rgba(0, 0, 0, 0.3) !important;
+  border-radius: .2rem !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.0125), 0 1px 1px rgba(0, 0, 0, 0.05);
+  border-top-width: .0625rem !important;
+  border-bottom-width: calc(.2rem + .0625rem) !important;
+}
+
+.ui-corner-all.ui-state-hover:active {
+  border-top-width: calc(.2rem + .0625rem) !important;
+  border-bottom-width: .0625rem !important;
+}
+
+.ui-state-hover {
+  background-color: var(--main-button-3) !important;
+  color: var(--main-text-primary) !important;
+  border: 1px solid rgba(0, 0, 0, 0.3) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.0125), 0 1px 1px rgba(0, 0, 0, 0.05);
+  border-top-width: .0625rem !important;
+  border-bottom-width: calc(.2rem + .0625rem) !important;
+}
+
+.ui-state-highlight {
+  background-color: var(--main-button-4) !important;
+  color: var(--main-text-primary) !important;
+  border: 1px solid rgba(0, 0, 0, 0.3) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.0125), 0 1px 1px rgba(0, 0, 0, 0.05);
+  border-top-width: .0625rem !important;
+  border-bottom-width: calc(.2rem + .0625rem) !important;
+}
+
+.ui-state-active {
+  background-color: var(--main-button-5) !important;
+  color: var(--main-text-primary) !important;
+  border: 1px solid rgba(0, 0, 0, 0.3) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.0125), 0 1px 1px rgba(0, 0, 0, 0.05);
+  border-top-width: calc(.2rem + .0625rem) !important;
+  border-bottom-width: .0625rem !important;
+}
+
+/* Timepicker CSS */
+.ui-timepicker-wrapper {
+  width: 7.5em !important;
+  color: var(--main-text-secondary) !important;
+  border: 1px solid rgba(0, 0, 0, 0.3) !important;
+  border-radius: 3px !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.0125), 0 1px 1px rgba(0, 0, 0, 0.05);
+  border-top-width: .0625rem !important;
+  border-bottom-width: calc(.2rem + .0625rem) !important;
+  scrollbar-width: none !important;
+}
+
+.ui-timepicker-list {
+  margin-right: .2rem !important;
+  margin-left: .2rem !important;
+}
+
+.ui-timepicker-wrapper::-webkit-scrollbar {
+  display: none !important;
+}
+
+.ui-timepicker-am, .ui-timepicker-pm {
+  background-color: var(--main-button-active) !important;
+  color: var(--main-text-secondary) !important;
+  border: 1px solid rgba(0, 0, 0, 0.3) !important;
+  border-radius: .2rem !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.0125), 0 1px 1px rgba(0, 0, 0, 0.05) !important;
+  border-top-width: .0625rem !important;
+  border-bottom-width: calc(.2rem + .0625rem) !important;
+  text-align: center !important;
+  margin-top: .2rem !important;
+  margin-bottom: .2rem !important;
+}
+
+.ui-timepicker-am:hover, .ui-timepicker-pm:hover {
+  background-color: var(--main-button-3) !important;
+  color: var(--main-text-primary) !important;
+  border: 1px solid rgba(0, 0, 0, 0.3) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.0125), 0 1px 1px rgba(0, 0, 0, 0.05);
+  border-top-width: .0625rem !important;
+  border-bottom-width: calc(.2rem + .0625rem) !important;
+}
+
+.ui-timepicker-selected {
+  background-color: var(--main-button-5) !important;
+  color: var(--main-text-primary) !important;
+  border: 1px solid rgba(0, 0, 0, 0.3) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.0125), 0 1px 1px rgba(0, 0, 0, 0.05);
+  border-top-width: calc(.2rem + .0625rem) !important;
+  border-bottom-width: .0625rem !important;
+}

@@ -1,0 +1,183 @@
+{{!-- Navbar --}}
+{{>navbar}}
+{{#if found}}
+<div class="container profile margin-custom-6">
+  {{!-- Username and Info--}}
+  <div class="row my-2">
+    <div class="card w-100">
+      <div class="card-body profile-card">
+        <div class="row">
+          <div class="col d-flex">
+            <div style="flex: 1;"></div>
+            <div class="profile-card-title f-700 text-center">
+              {{username}}'s Profile
+            </div>
+            <div class="text-right" style="flex: 1;">
+              <button type="submit" class="button button-depth button-color-3 button-active py-1 px-2"
+                id="host-profile-button">
+                <i class="fas fa-cog"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        <ul class="stat-list d-flex flex-wrap">
+          <li class="text-center px-2">
+            <div class="f-700">{{island_hosted}}</div>
+            <div>/ISLANDS HOSTED</div>
+          </li>
+          <li class="text-center px-2">
+            <div class="f-700">{{island_visited}}</div>
+            <div>/ISLANDS VISITED</div>
+          </li>
+        </ul>
+        {{#if isForeignUser}}{{else}}
+        <div class="row mt-3 d-none" id="host-profile-control">
+          <div class="col-sm text-center">
+            <button type="button" class="button button-depth button-color-5 py-1 px-2"
+              onclick="CreateAlert(TOAST_MSG['warningTag'] + TOAST_MSG['warningClearVisited']); ClearVisitedIslands({{uuid}});">
+              Clear Visited Islands
+            </button>
+            <button class="button button-depth button-color-5 py-1 px-2"
+              onclick="CreateAlert(TOAST_MSG['warningTag'] + TOAST_MSG['warningClearInactive']); ClearInactiveIslands({{uuid}});">
+              Clear Inactive Islands
+            </button>
+            <button class="button button-depth button-color-5 py-1 px-2"
+              onclick="CreateAlert(TOAST_MSG['warningTag'] + TOAST_MSG['warningClearAll']); ClearAllIslands({{uuid}});">
+              Clear All Islands
+            </button>
+          </div>
+        </div>
+        {{/if}}
+      </div>
+    </div>
+  </div>
+  <div class="row my-2">
+    <div class="card text-center w-100">
+      <div class="card-header">
+        <ul class="nav nav-tabs card-header-tabs" id="card-navbar">
+          <li class="nav-item">
+            <a class="nav-link active" href="#host_island">Islands</a>
+          </li>
+          {{#if isForeignUser}}{{else}}
+          <li class="nav-item">
+            <a class="nav-link" href="#visited_island">Visited Islands</a>
+          </li>
+          {{/if}}
+        </ul>
+      </div>
+      {{!-- Card Body --}}
+      <div class="card-body">
+        <div class="tab-content mt-3">
+          <div class="tab-pane active" id="host_island" role="tabpanel">
+            <div class="container">
+              {{!-- Island --}}
+              <div class="row my-2">
+                <div class="col-sm-6">
+                  <h4 class="card-title f-700">Currently Hosting Islands</h4>
+                  {{!-- Card Column 1 --}}
+                  {{#each active_island_list}}
+                  {{>island_card}}
+                  {{else}}
+                  <script>
+                    $(function () {
+                      $('#no-card-list-1').removeClass('d-none');
+                    });
+                  </script>
+                  {{/each}}
+                  <div class="row m-2 d-none" id="no-card-list-1">
+                    <div class="card error-card w-100">
+                      <div class="card-body">
+                        <p class="card-text">There are current no islands right now!</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <h4 class="card-title f-700">Past Hosted Islands</h4>
+                  {{!-- Card Column 2 --}}
+                  {{#each inactive_island_list}}
+                  {{>island_card}}
+                  {{else}}
+                  <script>
+                    $(function () {
+                      $('#no-card-list-2').removeClass('d-none');
+                    });
+                  </script>
+                  {{/each}}
+                  <div class="row m-2 d-none" id="no-card-list-2">
+                    <div class="card error-card w-100">
+                      <div class="card-body">
+                        <p class="card-text">There are current no islands right now!</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {{#if isForeignUser}}{{else}}
+          <div class="tab-pane" id="visited_island" role="tabpanel">
+            <div class="row my-2">
+              <div class="col">
+                <h4 class="f-700">Islands You Visited Before</h4>
+              </div>
+            </div>
+            {{#if visited_island_list_l}}
+            <div class="row">
+              <div class="col-sm-6">
+                {{!-- Card Column 1 --}}
+                {{#each visited_island_list_l}}
+                {{>island_card}}
+                {{/each}}
+              </div>
+              <div class="col-sm-6">
+                {{!-- Card Column 2 --}}
+                {{#each visited_island_list_r}}
+                {{>island_card}}
+                {{/each}}
+              </div>
+            </div>
+            {{else}}
+            <script>
+              $(function () {
+                $('#no-card-list-3').removeClass('d-none');
+              });
+            </script>
+            {{/if}}
+            <div class="row m-2 d-none" id="no-card-list-3">
+              <div class="card error-card w-100">
+                <div class="card-body">
+                  <p class="card-text">There are current no islands right now!</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          {{/if}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{{else}}
+<div class="container margin-custom-6">
+  <div class="row my-2">
+    <div class="card error-card w-100">
+      <div class="card-body">
+        <p class="card-text"><strong>Error! </strong>User does not exist!</p>
+      </div>
+    </div>
+  </div>
+  <div class="row my-2 text-center d-block">
+    <a class="button button-depth button-color-1" href="/dashboard">Back to Dashboard</a>
+  </div>
+</div>
+{{/if}}
+{{!-- Persistant Add Button and Modal --}}
+{{>create_button}}
+{{>modal_host_island}}
+{{>modal_alert}}
+{{!-- SCRIPTS --}}
+<script>
+  socket = io('/profile');
+  currUserUuid = {{ uuid }};
+</script>

@@ -1,0 +1,108 @@
+/* User Profile CSS */
+
+.profile {
+  color: var(--main-text-secondary);
+  font-weight: 600;
+}
+
+.stat-list {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  list-style: none;
+  margin-bottom: 0;
+  margin-top: 0;
+  padding: 0;
+}
+
+.error-card {
+  text-align: center;
+  color: var(--main-text-primary);
+  font-weight: 600;
+  background-color: var(--error-toast-bg) !important;
+  border-color: var(--error-toast-bg) !important;
+}
+
+/* Island Card CSS */
+.active-island-card .card-text, .inactive-island-card .card-text {
+  margin-bottom: 0;
+}
+
+.active-island-card a, .inactive-island-card a {
+  color: var(--main-text-secondary) !important;
+}
+
+.active-island-card, .inactive-island-card {
+  border: 0 !important;
+  /* border-radius: 0 !important; */
+}
+
+.active-island-card {
+  background-color: var(--active-island) !important;
+}
+
+.inactive-island-card {
+  background-color: var(--inactive-island) !important;
+}
+
+.card-col {
+  padding-top: 15px !important;
+  padding-bottom: 15px !important;
+}
+
+.card-col-left {
+  border: 1px solid rgba(0, 0, 0, .125);
+  border-right: 0;
+  background-color: var(--sub-island) !important;
+  border-top-left-radius: .25rem !important;
+  border-bottom-left-radius: .25rem;
+}
+
+.card-col-right {
+  border: 1px solid rgba(0, 0, 0, .125);
+  border-left: 0;
+  border-top-right-radius: .25rem !important;
+  border-bottom-right-radius: .25rem !important;
+}
+
+.bell-price, .dodo-code {
+  font-size: 2.5rem !important;
+  line-height: 2.25rem;
+}
+
+.card-col-left .card-title {
+  margin-bottom: 0 !important;
+}
+
+.list-group-item:last-child {
+  border-bottom-width: 1px !important;
+}
+
+.list-group-item:first-child {
+  border-top-width: 1px !important;
+}
+
+.filter-header {
+  border-bottom: 0 !important;
+  background-color: var(--filter-title) !important;
+  color: var(--main-text-primary) !important;
+}
+
+#filter-control {
+  position: fixed;
+}
+
+.description-box-alpha {
+  border: 1px solid rgba(0, 0, 0, .125);
+  border-radius: .25rem;
+  background-color: var(--description-box-alpha);
+  padding: .5rem;
+}
+
+@media screen and (max-width: 992px) {
+  #host-profile-control button {
+    width: 50%;
+    margin-top: .25rem;
+    margin-bottom: .25rem;
+  }
+}

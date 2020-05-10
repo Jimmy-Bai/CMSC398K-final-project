@@ -1,0 +1,62 @@
+{{!-- Navbar --}}
+{{>navbar}}
+<div class="container profile margin-custom-6">
+  <div class="row">
+    {{!-- Filter Controls --}}
+    <div class="col-sm-3 filter-control-col">
+      <div class="card borderless" id="filter-control">
+        <div class="card-header filter-header">
+          <h5 class="card-title mb-0 f-700 text-center">Filters</h5>
+        </div>
+        <div class="p-0 card-body text-center">
+          <div class="col p-3">
+            <button type="button" class="px-2 py-1 w-100 h6 button button-depth button-color-2 button-active f-700" id="fee-filter">
+              Show Fee Not Required
+            </button>
+            <button type="button" class="px-2 py-1 w-100 h6 button button-depth button-color-2 button-active f-700"
+              id="active-filter">
+              Show Active Islands
+            </button>
+            <button type="button" class="px-2 py-1 mb-0 w-100 h6 button button-depth button-color-5 f-700" id="clear-filter">
+              Clear All Filter
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    {{!-- Island Cards --}}
+    <div class="col-sm-9" id="island-list">
+      {{#each island_profile_list}}
+      {{>island_card}}
+      {{else}}
+      <script>
+        $(function () {
+          $('#no-card-list').removeClass('d-none');
+        });
+      </script>
+      {{/each}}
+      <div class="row my-2 d-none" id="no-card-list">
+        <div class="card error-card w-100">
+          <div class="card-body">
+            <p class="card-text">There are current no islands right now!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+{{!-- Persistant Add Button and Modal --}}
+{{>create_button}}
+{{>modal_host_island}}
+{{!-- SCRIPTS --}}
+<script>
+  socket = io('/index');
+  currUserUuid = {{ uuid }};
+</script>
+{{!-- Set width of fixed filter control --}}
+<script>
+  $(function() {
+    $('#filter-control').width( $('.filter-control-col').width());
+  });
+</script>

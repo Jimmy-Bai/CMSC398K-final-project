@@ -1,0 +1,307 @@
+{{!-- Navbar --}}
+{{>navbar}}
+{{#if found}}
+<div class="container profile margin-custom-6">
+  <div class="row my-2 mx-auto justify-content-center">
+    <div class="col-sm-9 main-island-card">
+      <div class="card borderless">
+        <div class="card-body">
+          {{!-- Top Row (Island Name and Button) --}}
+          <div class="row">
+            <div class="col-sm-6">
+              <h5 class="card-title f-700">
+                Island ID: {{island_uuid}}
+              </h5>
+              <h5 class="card-title f-700">
+                {{!-- Requrie Socket --}}
+                <div class="d-none" style="color: var(--success-toast-bg) !important;" id="island-active">
+                  Island is currently hosting
+                </div>
+                <div class="d-none" style="color: var(--error-toast-bg) !important;" id="island-inactive">
+                  Island has stopped hosting
+                </div>
+              </h5>
+            </div>
+            {{!-- Show Queue Button (Host Only) --}}
+            {{#if is_host}}
+            <div class="col-sm-6 text-right">
+              <button type="button" class="px-2 py-1 h6 button button-depth button-color-2 button-active"
+                id="show-queue">
+                Show Queue
+              </button>
+            </div>
+            {{/if}}
+          </div>
+          {{!-- Bell Price --}}
+          <div class="text-center px-2">
+            <div class="f-700 bell-price">{{bell_price}}</div>
+            <h5 class="card-title">/BELLS</h5>
+          </div>
+          {{!-- Island Info --}}
+          <ul class="stat-list my-3 d-flex flex-wrap">
+            <li class="text-center px-2">
+              <div class="f-700"><a href="/dashboard/profile/{{host_id}}">{{host_name}}</a></div>
+              <div>/HOST</div>
+            </li>
+            <li class="text-center px-2">
+              <div class="f-700" id="user-visited">{{curr_index}}</div>
+              <div>/VISITED</div>
+            </li>
+            {{!-- Requrie Socket --}}
+            <li class="text-center px-2">
+              <div class="f-700" id="current-queue-size">{{queue_list.length}}/{{queue_limit}}</div>
+              <div>/QUEUE LIMIT</div>
+            </li>
+            <li class="text-center px-2">
+              <div class="f-700">{{visitor_limit}}</div>
+              <div>/VISITOR LIMIT</div>
+            </li>
+            <li class="text-center px-2">
+              <div class="f-700">{{fee}}</div>
+              <div>/FEE</div>
+            </li>
+          </ul>
+          {{!-- Island Opening Time --}}
+          <h5 class="card-title text-center">Island open at: <strong>{{start_datetime}}</strong></h5>
+          <p class="card-text text-center description-box mb-0">
+            {{description}}
+          </p>
+          {{!-- Host View (Controls) --}}
+          {{#if is_host}}
+          {{#if active}}
+          <div class="row mt-3" id="host-control">
+            <div class="col-sm-3 text-center">
+              <h5 class="card-title f-700">Current Visitors:</h5>
+              <div class="description-box" id="visitor-list">
+                {{#each visitor_list}}
+                <p class="card-text mb-0 visitor-list-item text-left">
+                  <script>document.write((parseInt({{@index}}) + 1) + '. ');</script>
+                  <span class="visitor-list-name">{{this.username}}</span>
+                </p>
+                {{else}}
+                <p class="card-text mb-0">No one is visiting!</p>
+                {{/each}}
+              </div>
+            </div>
+            <div class="col-sm-4 align-self-center">
+              <div class="text-center">
+                <div class="f-700 bell-price">{{dodo_code}}</div>
+                <div>/DODO CODE</div>
+              </div>
+            </div>
+            <div class="col-sm-5 align-self-center">
+              <div class="row">
+                <div class="col-lg pr-1 text-center align-self-center">
+                  <button type="button" class="p-2 w-100 button button-depth button-color-2"
+                    onclick="NextGroup({{island_uuid}})">
+                    Next Group
+                  </button>
+                </div>
+                <div class="col-lg pl-1 text-center align-self-center">
+                  <button type="button" class="p-2 w-100 button button-depth button-color-5" onclick="CreateAlert(
+                  TOAST_MSG['warningTag'] + TOAST_MSG['warningEndHost']); EndIslandHosting({{island_uuid}});">
+                    End Hosting
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          {{/if}}
+          {{/if}}
+          <div id="client-view">
+            {{!-- Main Island Info --}}
+            {{#if active}}
+            {{#if is_host}}{{else}}
+            {{!-- Foreign User View (After Visiting) --}}
+            <p class="card-text text-center description-box after-visiting d-none mb-0 mt-3">
+              You have already visited this island! Go and check out other islands!
+            </p>
+            {{!-- Foreign User View (After Joining) --}}
+            <div class="row after-joining d-none mt-3">
+              <div class="col-sm-3 text-center" id="visitor-list-col">
+                <h5 class="card-title f-700">Current Visitors:</h5>
+                <div class="description-box" id="visitor-list">
+                  {{#each visitor_list}}
+                  <p class="card-text mb-0 visitor-list-item text-left">
+                    <script>document.write((parseInt({{@index}}) + 1) + '. ');</script>
+                    <span class="visitor-list-name">{{this.username}}</span>
+                  </p>
+                  {{else}}
+                  <p class="card-text mb-0">No one is visiting!</p>
+                  {{/each}}
+                </div>
+              </div>
+              <div class="col-sm-3 align-self-center" id="current-place-col">
+                <div class="text-center px-2">
+                  <div class="f-700 bell-price" id="current-place">{{current_place}}</div>
+                  <div>/PLACE IN QUEUE</div>
+                </div>
+              </div>
+              <div class="col-sm-6 align-self-center" id="leave-queue-button">
+                <button type="button" class="p-2 button button-depth button-color-5 w-100" onclick="CreateAlert(
+                  TOAST_MSG['warningTag'] + TOAST_MSG['warningLeaveQueue']); LeaveQueue({{island_uuid}}, {{uuid}});">
+                  Leave Queue
+                </button>
+              </div>
+            </div>
+            {{!-- Dodo Code (When it's Foreign User's Turn) --}}
+            <div class="row mt-3 current-turn d-none">
+              <div class="col-sm">
+                <div class="dodo-box">
+                  <div class="text-center px-2">
+                    <div class="f-700 dodo-code">{{dodo_code}}</div>
+                    <div>/DODO CODE</div>
+                    <div>(Warning: Do NOT share this Dodo code with any one.)</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {{!-- Foreign User View (Before Joining) --}}
+            <div class="row before-joining">
+              <div class="col-sm d-none mt-3" id="full-queue-alert">
+                <p class="card-text text-center description-box mb-0 mt-3">
+                  Sorry! This island is full! Go and check out other islands or wait for someone to leave!
+                </p>
+              </div>
+              <div class="col-sm mt-3" id="join-button">
+                {{!-- <button type="button" class="p-2 button button-depth button-color-3 w-100"> --}}
+                <button type="button" class="p-2 button button-depth button-color-3 w-100"
+                  onclick="JoinQueue({{island_uuid}}, {{uuid}});">
+                  Join Queue
+                </button>
+              </div>
+            </div>
+            {{/if}} {{!-- If user is host --}}
+            {{/if}} {{!-- If island is active --}}
+          </div>
+        </div>
+      </div>
+    </div>
+    {{!-- Queue List （Host Only) --}}
+    {{#if is_host}}
+    <div class="col-sm-3 d-none" id="queue-container">
+      <div class="card borderless" id="queue-height">
+        <div class="card-header queue-header text-center">
+          <h5 class="card-title mb-0 f-700">Current Queue List</h5>
+        </div>
+        <div class="px-0 card-body" id="queue-scroll">
+          <ul class="list-group list-group-flush" id="queue-list">
+            {{#each queue_list}}
+            <li class="py-2 list-group-item">
+              <script>document.write((parseInt({{@index}}) + 1) + '. ');</script>{{this.username}}
+            </li>
+            {{else}}
+            <li class="py-2 list-group-item">
+              <div class="description-box text-center">
+                No one in queue!
+              </div>
+            </li>
+            {{/each}}
+          </ul>
+        </div>
+      </div>
+    </div>
+    {{/if}}
+  </div>
+</div>
+{{else}}
+{{!-- If No Island is Found --}}
+<div class="container margin-custom-6">
+  <div class="row my-2">
+    <div class="card error-card w-100">
+      <div class="card-body">
+        <p class="card-text"><strong>Error! </strong>Island does not exist!</p>
+      </div>
+    </div>
+  </div>
+  <div class="row my-2 text-center d-block">
+    <a class="button button-depth button-color-1" href="/dashboard">Back to Dashboard</a>
+  </div>
+</div>
+{{/if}}
+{{!-- Persistant Add Button and Modal --}}
+{{>create_button}}
+{{>modal_host_island}}
+{{>modal_alert}}
+{{!-- SCRIPTS --}}
+{{!-- Defining variables --}}
+<script>
+  socket = io(`/island`);
+  currUserUuid = {{ uuid }};
+</script>
+{{!-- Show after-joining elements --}}
+{{!-- If cilent is already in queue --}}
+{{#if in_queue}}
+<script>
+  $(function () {
+    $('.after-joining').removeClass('d-none');
+    $('.before-joining').addClass('d-none');
+  });
+</script>
+{{/if}}
+{{!-- If queue is full --}}
+{{#if is_full_queue}}
+<script>
+  $(function () {
+    $('#full-queue-alert').removeClass('d-none');
+    $('#join-button').addClass('d-none');
+  });
+</script>
+{{/if}}
+{{!-- If it is current users's turn to visit the island --}}
+{{!-- If current user is on visitor list, display Dodo code --}}
+{{#if in_queue}}
+<script>
+  $(function () {
+    const visitorArray = $('#visitor-list').find('.visitor-list-name').map(function () { return $(this).html() }).toArray();
+
+    if ($.inArray('{{ username }}', visitorArray) != -1) {
+      // Show Dodo code and remove leave queue button
+      $('.current-turn').removeClass('d-none');
+      $('#leave-queue-button').addClass('d-none');
+
+      // Expand current place container
+      $('#current-place-col').removeClass('col-sm-3');
+      $('#current-place-col').addClass('col-sm-6');
+
+      // Expand visitor list container
+
+      $('#visitor-list-col').removeClass('col-sm-3');
+      $('#visitor-list-col').addClass('col-sm-6');
+      console.log('User is in visitor list.');
+    } else {
+      console.log('User is NOT in visitor list.')
+    }
+  });
+</script>
+{{/if}}
+{{!-- If the current user already visited the island --}}
+{{#if in_queue_before}}
+<script>
+  $(function () {
+    $('.after-visiting').removeClass('d-none');
+    $('.after-joining').addClass('d-none');
+    $('.current-turn').addClass('d-none');
+  });
+</script>
+{{/if}}
+{{!-- Set island active status --}}
+{{#if active}}
+<script>
+  $(function () {
+    $('#island-active').removeClass('d-none');
+  });
+</script>
+{{else}}
+<script>
+  $(function () {
+    $('#island-inactive').removeClass('d-none');
+  });
+</script>
+{{/if}}
+{{!-- Set height of queue list --}}
+<script>
+  $(function() {
+    $('#queue-height').height( $('.main-island-card').height());
+  });
+</script>

@@ -1,0 +1,63 @@
+.stat-list a {
+  color: var(--main-text-secondary) !important;
+}
+
+.description-box {
+  border: 1px solid rgba(0, 0, 0, .125);
+  border-radius: .25rem;
+  background-color: var(--main-button-active);
+  padding: .5rem;
+}
+
+.dodo-box {
+  border: 1px solid rgba(0, 0, 0, .125);
+  border-radius: .25rem;
+  background-color: var(--dodo-box-bg);
+  padding: 1rem;
+  color: var(--main-text-primary);
+}
+
+#queue-scroll {
+  overflow: auto;
+  border-bottom-left-radius: .25rem;
+  border-bottom-right-radius: .25rem;
+}
+
+.queue-header {
+  border-bottom: 0 !important;
+  background-color: var(--queue-list-title) !important;
+  color: var(--main-text-primary) !important;
+}
+
+#card-navbar .nav-link {
+  color: var(--main-text-secondary) !important;
+}
+
+.profile-card-title {
+  font-size: 36px;
+}
+
+@media screen and (max-width: 992px) {
+  /* Island CSS */
+  .card.borderless .row .col-lg {
+    padding-top: .25rem !important;
+    padding-bottom: .25rem !important;
+  }
+  .card.borderless .row .col-sm-4 {
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+  }
+  .card.borderless .row .pr-1 {
+    padding-right: 15px !important;
+  }
+  .card.borderless .row .pl-1 {
+    padding-left: 15px !important;
+  }
+  /* Island Card CSS */
+  .card-col-left {
+    border: 1px solid rgba(0, 0, 0, .125) !important;
+    border-bottom-width: 0 !important;
+    border-bottom-left-radius: 0 !important;
+    border-top-right-radius: .25rem !important;
+  }
+}

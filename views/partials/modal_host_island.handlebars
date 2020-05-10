@@ -1,0 +1,72 @@
+<div class="modal fade" id="host-modal" tabindex="-1" role="dialog" aria-labelledby="host-modal-label"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      {{!-- Modal Header --}}
+      <div class="modal-header mb-0">
+        <h5 class="modal-title" id="host-modal-label">Host a New Island</h5>
+      </div>
+      {{!-- Modal Body --}}
+      <div class="modal-body py-0">
+        <form method="POST" action="/island/create" onsubmit="return ValidateHostIslandForm();" name="host_modal">
+          {{!-- Notification Container --}}
+          {{>alert}}
+          <div class="form-row">
+            {{!-- Dodo Code --}}
+            <div class="form-group col">
+              <label class="col-form-label">Dodo Code</label>
+              <input type="text" class="form-control" id="dodo-restrict" name="dodo_code" placeholder="Dodo Code..." required>
+            </div>
+            {{!-- Bell Price --}}
+            <div class="form-group col">
+              <label class="col-form-label">Bell Price</label>
+              <input type="test" class="form-control number-restrict" name="bell_price" placeholder="Bell Price..." required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col">
+              <label class="col-form-label">Visitor Limit</label>
+              <input type="test" class="form-control number-restrict" name="visitor_limit" placeholder="Visitor Limit..." required>
+            </div>
+            <div class="form-group col">
+              <label class="col-form-label">Queue Limit</label>
+              <input type="test" class="form-control number-restrict" name="queue_limit" placeholder="Queue Limit..." required>
+            </div>
+          </div>
+          {{!-- Start Date --}}
+          <div class="form-row">
+            <div class="form-group col-8">
+              <label class="col-form-label">Start Date</label>
+              <input type="text" class="form-control datepicker" id="date-restrict" name="start_date" placeholder="End Date..." required>
+            </div>
+            <div class="form-group col-4">
+              <label class="col-form-label">Start Date</label>
+              <input type="text" class="form-control timepicker" id="time-restrict" name="start_time" placeholder="Start Time..." required>
+            </div>
+          </div>
+          {{!-- Fee --}}
+          <div class="form-row">
+            <div class="form-group col">
+              <div class="form-check form-check-inline">
+                <label class="col-form-label">Entry Fee?</label>
+                <input class="form-check-input mx-3" type="checkbox" name="fee_checkbox">
+              </div>
+            </div>
+          </div>
+          {{!-- Description --}}
+          <div class="form-row">
+            <div class="form-group col">
+              <label class="col-form-label">Description</label>
+              <textarea class="form-control" name="description" placeholder="Description..." required></textarea>
+            </div>
+          </div>
+          {{!-- Modal Footer --}}
+          <div class="modal-footer px-0">
+            <button type="submit" class="button button-depth button-color-3">Host Island!</button>
+            <button type="button" class="button button-depth button-color-2" data-dismiss="modal">Close</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
