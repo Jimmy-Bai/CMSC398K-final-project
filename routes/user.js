@@ -1,6 +1,7 @@
 const express = require('express');
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
+const { ensureAuthenticated, forwardAuthenticated } = require('../public/js/auth');
 
 const User = require('../db/User');
 const UserProfile = require('../db/UserProfile');
@@ -8,13 +9,12 @@ const router = express.Router();
 
 module.exports = function (io) {
   // Render user sign up page
-  router.get('/signup', function (req, res) {
+  router.get('/signup', forwardAuthenticated, function (req, res) {
     res.render('user_sign_up');
   });
 
   // Render user sign in page
-  router.get('/signin', function (req, res) {
-    // console.log(auth_error);
+  router.get('/signin', forwardAuthenticated, function (req, res) {
     res.render('user_sign_in');
   });
 
@@ -51,8 +51,6 @@ module.exports = function (io) {
       msg.push({ msg: 'Password does not match! Please check and retype password.' });
     }
 
-    // DEBUG
-    msg.forEach(element => console.log(`MESSAGE: ${element.msg}`));
     // Rerender current page with the info if not all fields are validated
     // Else add new user to database
     if (msg.length > 0) {

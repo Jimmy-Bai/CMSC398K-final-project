@@ -92,11 +92,10 @@ app.use('/', require('./routes/index')(io));
 app.use('/user', require('./routes/user')(io));
 app.use('/island', require('./routes/island')(io));
 
-// Setting up main Socket.io server
-// io.on('connection', function (socket) {
-//   console.log(`Socket (${socket.id}) connecting to /`);
-// });
-
+// Setting up 404 page
+app.use(function (req, res) {
+  res.status(404).render('404');
+});
 
 // Add port for app
 server.listen(PORT, function () {

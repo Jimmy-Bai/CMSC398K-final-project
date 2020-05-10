@@ -21,6 +21,12 @@ module.exports = function (io) {
     let currentPlace = 0;
     let hostName = '';
 
+    // Make sure the given island uuid is a number
+    if (isNaN(_islandUuid)) {
+      res.redirect('/');
+      return;
+    }
+
     // Get island information
     Island.findOne({ island_uuid: _islandUuid })
       .then((Island) => {
@@ -129,10 +135,6 @@ module.exports = function (io) {
             fee_required: _fee
           });
 
-          // Notified all user currently in queue when island started
-          // Set up job using agenda
-          // Save agenda job to data base
-
           // Save new island to data base, 
           // Then, redirect to island page
           newIsland.save()
@@ -144,7 +146,6 @@ module.exports = function (io) {
                 Profile.island_hosted = Profile.host_island_list.length + 1;
                 Profile.save()
                   .then((ResultProfile) => {
-                    console.log('User island list: ' + ResultProfile.host_island_list);
                     res.redirect(`/island/${Island.island_uuid}`);
                   });
               }

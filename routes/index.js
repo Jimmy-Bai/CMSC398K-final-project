@@ -40,6 +40,12 @@ module.exports = function (io) {
     let visitedIslandListRight = [];
     let updatedVisitedIslandList = [];
 
+    // Make sure the given uuid is a number
+    if (isNaN(_uuid)) {
+      res.redirect('/');
+      return;
+    }
+
     // Check if current user has access to current profile
     if (_uuid != req.user.uuid) {
       isForeignUser = true;
@@ -201,12 +207,6 @@ module.exports = function (io) {
           }
         })
       });
-  });
-
-  // Setting up /island socket.io server
-  io.of('/profile').on('connection', function (socket) {
-    // Debug
-    console.log('Socket is in profile.');
   });
 
   return router;
