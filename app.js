@@ -16,7 +16,7 @@ const { allowInsecurePrototypeAccess } = require('@handlebars/allow-prototype-ac
 
 // Require non-constant packages
 require('dotenv').config();
-require('./public/js/passport')(passport);
+require('./public/js/passport').Initialize(passport);
 
 // Require local js files
 const AppUtil = require('./public/js/app-util');
@@ -40,8 +40,7 @@ mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopol
 app.engine('handlebars', exphbs({
   defaultLayout: 'layout',
   layoutsDir: __dirname + '/views/layouts/',
-  handlebars: allowInsecurePrototypeAccess(handlebars),
-  helpers: require('./public/js/handlebars-helper')
+  handlebars: allowInsecurePrototypeAccess(handlebars)
 }));
 
 // Setting up MongoDB session store

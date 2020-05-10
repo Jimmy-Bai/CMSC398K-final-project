@@ -132,15 +132,6 @@ $(function () {
   });
 });
 
-// Host creat island
-function IslandCreation(islandUuid) {
-  // Sent data to sockets
-  socket.emit('islandCreation', {
-    socket_uuid: socket.id,
-    island_uuid: islandUuid
-  });
-}
-
 // Current user join queue
 function JoinQueue(islandUuid, currUserUuid) {
   // Hide 'Join Queue' button and show 'after-joining' elements
