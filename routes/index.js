@@ -19,18 +19,25 @@ module.exports = function (io) {
 
   // Dashboard page
   router.get('/dashboard', ensureAuthenticated, function (req, res) {
+    let islandUuidList = [];
+
     // Render all islands in the order they are added
     Island.find({})
       .then((IslandProfileList) => {
+        IslandProfileList.forEach((curr) => {
+          islandUuidList.push(curr.island_uuid);
+        });
+
         res.render('dashboard', {
           uuid: req.user.uuid,
-          island_profile_list: IslandProfileList.reverse()
+          island_profile_list: IslandProfileList.reverse(),
+          island_uuid_list: islandUuidList
         });
       });
   });
 
   // User profile page 
-  router.get('/dashboard/profile/:uuid', ensureAuthenticated, function (req, res) {
+  router.get('/dashboard/profile/:uuid', ensureAuthenticated, async function (req, res) {
     const _uuid = req.params.uuid;
     let isForeignUser = false;
     let activeHostIslandList = [];
@@ -39,12 +46,20 @@ module.exports = function (io) {
     let visitedIslandListLeft = [];
     let visitedIslandListRight = [];
     let updatedVisitedIslandList = [];
+    let islandUuidList = [];
+
 
     // Make sure the given uuid is a number
     if (isNaN(_uuid)) {
       res.redirect('/');
       return;
     }
+
+    // Get a list of all island id's
+    const currIslandList = await Island.find({});
+    currIslandList.forEach((curr) => {
+      islandUuidList.push(curr.island_uuid);
+    });
 
     // Check if current user has access to current profile
     if (_uuid != req.user.uuid) {
@@ -100,7 +115,8 @@ module.exports = function (io) {
                     active_island_list: activeHostIslandList,
                     inactive_island_list: inactiveHostIslandList,
                     visited_island_list_l: visitedIslandListLeft,
-                    visited_island_list_r: visitedIslandListRight
+                    visited_island_list_r: visitedIslandListRight,
+                    island_uuid_list: islandUuidList
                   });
                 });
             });
@@ -201,11 +217,11 @@ module.exports = function (io) {
         Profile.island_visited = 0;
 
         Profile.save()
-        .then((ResultProfile) => {
-          if (ResultProfile) {
-            res.send('Success');
-          }
-        })
+          .then((ResultProfile) => {
+            if (ResultProfile) {
+              res.send('Success');
+            }
+          })
       });
   });
 

@@ -11,7 +11,7 @@ const AppUtil = require('../public/js/app-util');
 
 module.exports = function (io) {
   // Island information page
-  router.get('/:island_uuid', ensureAuthenticated, function (req, res) {
+  router.get('/:island_uuid', ensureAuthenticated, async function (req, res) {
     const _islandUuid = req.params.island_uuid;
     let isHost = false;
     let inQueue = false;
@@ -20,12 +20,19 @@ module.exports = function (io) {
     let currentTurn = false;
     let currentPlace = 0;
     let hostName = '';
+    let islandUuidList = [];
 
     // Make sure the given island uuid is a number
     if (isNaN(_islandUuid)) {
       res.redirect('/');
       return;
     }
+
+    // Get a list of all island id's
+    const currIslandList = await Island.find({});
+    currIslandList.forEach((curr) => {
+      islandUuidList.push(curr.island_uuid);
+    });
 
     // Get island information
     Island.findOne({ island_uuid: _islandUuid })
@@ -90,7 +97,8 @@ module.exports = function (io) {
                 in_queue: inQueue,
                 current_place: currentPlace - Island.curr_index + 1,
                 active: Island.active,
-                queue_list: Island.queue_list
+                queue_list: Island.queue_list,
+                island_uuid_list: islandUuidList
               });
             });
         } else {

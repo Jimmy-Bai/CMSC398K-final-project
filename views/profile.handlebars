@@ -181,3 +181,9 @@
   socket = io('/profile');
   currUserUuid = {{ uuid }};
 </script>
+{{!-- Set current island UUID list --}}
+<script>
+  {{#each island_uuid_list}}
+  currentIslandList.push(({{this}}).toString());
+  {{/each}}
+</script>

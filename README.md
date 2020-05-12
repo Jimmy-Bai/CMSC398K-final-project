@@ -35,7 +35,7 @@ This schema holds all login information of users. A new entry is created when a 
 
 ### 2. User Profile Schema
 
-This schema holds all non login information of users. A new entry is created when a new user signs up.
+This schema holds all non-login information of users. A new entry is created when a new user signs up.
 
 ```javascript
 {
@@ -51,7 +51,7 @@ This schema holds all non login information of users. A new entry is created whe
 - `username` User's username
 - `uuid` An unique UID generated for the user
 - `island_hosted` Number of islands hosted by the user
-- `island_visited` Number of islands visited by the user. Only count if user joins and stays on the queue
+- `island_visited` Number of islands visited by the user. Only count if the user joins and stays on the queue
 - `visit_island_list` An array of islands' UUID that the user had visited before 
 - `host_island_list` An array of island's UUID that the user had host before or is currently hosting
 
@@ -86,18 +86,18 @@ This schema holds all islands created by all of the users. A new entry is create
 
 - `island_uuid` An unique ID generated for the island
 - `host_uuid` The uuid of the user that hosted this island
-- `dodo_code` The Dodo code that allows other player to visit the host's idland on Animal Crossing
+- `dodo_code` The Dodo code that allows other players to visit the host's island on Animal Crossing
 - `bell_price` The current Bell price per turnip on Animal Crossing
 - `start_time` The date and time when the host will start giving out Dodo code to users on the queue
-- `queue_limit` The number of users that is allow to be on the queue
+- `queue_limit` The number of users that are allowed to be on the queue
 - `current_queue` The number of users that is currently on the queue
-- `queue_list` A list of users' uuid and username that is on the queue
-- `visitor_limit` The number of users that is allow to receive the Dodo code at once
-- `visitor_list` A list of users' uuid and username that is currently visiting the host's island on Animcal Crossing
-- `curr_index` An index that points to how much of the queue list have been process
+- `queue_list` A list of users' UUID and username that is on the queue
+- `visitor_limit` The number of users that are allowed to receive the Dodo code at once
+- `visitor_list` A list of users' UUID and username that is currently visiting the host's island on Animal Crossing
+- `curr_index` An index that points to how much of the queue list has been processed
 - `description` The description of the island that includes what the host wants in return, rules of visiting, etc
 - `fee_required` Indicates if visiting the island requires a fee to the host. True if yes, false otherwise
-- `active` Indicates if the island is currently accepting users into the queue as well as if the queue is being proccess. True if yes, false otherwise
+- `active` Indicates if the island is currently accepting users into the queue as well as if the queue is being processed. True if yes, false otherwise
 
 ---
 
@@ -119,30 +119,36 @@ This schema holds all islands created by all of the users. A new entry is create
 
 4. `/island/create`
 
-    This endpoint takes in data through a form and creates an Island in MongoDb.
+    This endpoint takes in data through a form and creates an Island in MongoDB.
 
-### 2. DELTE Endpoint Routes
+### 2. DELETE Endpoint Routes
 
 1. `/dashboard/profile/deleteAll/:uuid`
 
-   This endpoing takes in a user's UUID and deletes all of the islands created by the user from the Island schema as well as to set the list of island that the user created before to an empty array in the UserProfile schema.
+   This endpoint takes in a user's UUID and deletes all of the islands created by the user from the Island schema as well as to set the list of islands that the user-created before to an empty array in the UserProfile schema.
 
 2. `/dashboard/profile/deleteInactive/:uuid`
 
-    This endpoing takes in a user's UUID and deletes all of the inactive islands created by the user from the Island schema as well as to set the list of island that the user created before to an empty array in the UserProfile schema.
+    This endpoint takes in a user's UUID and deletes all of the inactive islands created by the user from the Island schema as well as to set the list of islands that the user-created before to an empty array in the UserProfile schema.
 
 ---
 
-## IV. Navigation Pages
+## IV. Navigation Pages & Search Term
 
-- `/` Main page that user sees before logging in
-- `/signup` Sign up page that can be access from `/`
-- `/signin` Sign in page that can be access from `/`
-- `/about` About page that can be access from `/` or from the navbar that is on all of the pages after the user logs in
-- `/dashboard` Main page that user sees after logging in
+### 1. Navigation Pages
+
+- `/` Main page that the user sees before logging in
+- `/signup` Sign up page that can be accessed from `/`
+- `/signin` Sign in page that can be accessed from `/`
+- `/about` About page that can be accessed from `/` or from the navbar that is on all of the pages after the user logs in
+- `/dashboard` Main page that the user sees after logging in
 - `/dashboard/profile/:uuid` The profile page of a user that has that UUID. The current user's profile can be access from the navbar that is on all of the pages after the user logs in
-- `/island/:uuid` The island page that has that UUID and can be access by clicking the UUID of the island that is presented on the island cards rendered on `/dashboard`
-- `/404` A 404 page that will be redirected to when non of the above url is entered
+- `/island/:UUID` The island page that has that UUID and can be accessed by clicking the UUID of the island that is presented on the island cards rendered on `/dashboard`
+- `/404` A 404 page that will be redirected to when none of the above URL is entered
+
+### 2. Search Terms
+
+- `Search Term` Island UUID
 
 ---
 
@@ -159,10 +165,10 @@ module.exports = {
 }
 ```
 
-- `JoinQueue` Handles request when a user joins the queue of an island. Responsible for writing changes to database. Returns a JS object containing necessary data needed by sockets as well as a call back function.
-- `LeaveQueue` Handles request when a user leaves the queue of an island. Responsible for writing changes to database. Returns a JS object containing necessary data needed by sockets as well as a call back function.
-- `NextGroup` Handles request when the host gives the Dodo code to the next group of users. Responsible for writing changes to database. Returns a JS object containing necessary data needed by sockets as well as a call back function.
-- `EndIslandHosting` handles request when the host closes the island. Responsible for writing changes to database. Returns a JS object containing necessary data needed by sockets as well as a call back function.
+- `JoinQueue` Handles request when a user joins the queue of an island. Responsible for writing changes to the database. Returns a JS object containing necessary data needed by sockets as well as a call back function.
+- `LeaveQueue` Handles request when a user leaves the queue of an island. Responsible for writing changes to the database. Returns a JS object containing necessary data needed by sockets as well as a call back function.
+- `NextGroup` Handles request when the host gives the Dodo code to the next group of users. Responsible for writing changes to the database. Returns a JS object containing necessary data needed by sockets as well as a call back function.
+- `EndIslandHosting` handles requests when the host closes the island. Responsible for writing changes to the database. Returns a JS object containing necessary data needed by sockets as well as a call back function.
 
 ### 2. auth.js
 
@@ -185,7 +191,7 @@ module.exports = {
 }
 ```
 
-- `Initialize` Initialize the authentication strategy that is used for authenicating the user when logging in. The strategy used for authentication is `passport-local`. Responsible for comparing the input username password pair with the username password pair on the database.
+- `Initialize` Initialize the authentication strategy that is used for authenticating the user when logging in. The strategy used for authentication is `passport-local`. Responsible for comparing the input username password pair with the username-password pair on the database.
 
 ---
 
@@ -213,25 +219,25 @@ module.exports = {
 #### For user session
 
 - `connect-flash` Stores flash messages that can be displayed after being redirected to another page. Used on `/signin` and `/signup` page
-- `connect-mongodb-session` Stores user's sessions when a user log in on the database. This helps the user to stay logged in on tab closed or server restart.
+- `connect-mongodb-session` Stores user's sessions when a user logs in on the database. This helps the user to stay logged in on tab close or server restart.
 - `express-session` This is needed for both `connect-mongodb-session` and `connect-flash`
 
 #### Other
 
 - `moment` Use to compare date and time as well as parsing `String` into an `ISO 8601` format
-- `@handlebars/allow-prototype-access` Use to bypass a security feature implemented in new version of `handlebars` that forbids the accesss of internal properties of an object
+- `@handlebars/allow-prototype-access` Use to bypass a security feature implemented in the new version of `handlebars` that forbids the access of internal properties of an object
 
 ---
 
-## VII. Socket io Usage
+## VII. socket.<span></span>io Usage
 
 ### 1. Implementation
 
-The only place socksts are being implemented is on the island page, which means all links that goes with the format `/island/:uuid`. The purpose of this implementation is to alert and updaet all users who are currently on the page. Real time notifications and changes allow users to see what is going on without refreshing. Client side socket functionalities are in `soketio.js` while server side cocket functionalities are in `island.js`.
+The only place sockets are being implemented is on the island page, which means all links that go with the format `/island/:uuid`. The purpose of this implementation is to alert and update all users who are currently on the page. Real-time notifications and changes allow users to see what is going on without refreshing. Client-side socket functionalities are in `soketio.js` while server-side socket functionalities are in `island.js`.
 
 ### 2. Namespace and rooms
 
-In order to differentiate users who are on the island page and who are not, as well as users on different island page, both namespace and rooms are used. Below are the setup for namespace:
+In order to differentiate users who are on the island page and who are not, as well as users on different island page, both namespace and rooms are used. Below is the setup for namespace:
 
 - Server side
 ```javascript
@@ -245,7 +251,7 @@ io.of('/island').on('connection', function (socket) {
 socket = io(`/island`);
 ```
 
-This allow users to join a socket server ONLY if they visit an island page. However, with only the setup of namespace, users visiting island page with different UUID will be on the same socket server. In order to separate them, a unique room is created for each island using the UUID. This is achieved by parsing the URL that is in the socket header and extracting the UUID from the url.
+This allows users to join a socket server ONLY if they visit an island page. However, with only the setup of namespace, users visiting the island page with different UUID will be on the same socket server. In order to separate them, a unique room is created for each island using the UUID. This is achieved by parsing the URL that is in the socket header and extracting the UUID from the URL.
 
 ```javascript
     // Parse island uuid for room creation
@@ -261,11 +267,11 @@ This allow users to join a socket server ONLY if they visit an island page. Howe
 
 ### 3. Functionalities
 
-The general proccess of the socket server-client interaction:
+The general process of the socket server-client interaction:
 
-1. User send request. `Client` emits message.
-2. `Server` receives message emitted by client. Update database if necessary. Emits message back to client.
-3. `Client` receives message emitted by client. Update HTML using Javascript.
+1. User sends a request. `Client` emits message.
+2. `Server` receives a message emitted by the client. Update the database if necessary. Emits message back to the client.
+3. `Client` receives a message emitted by the client. Update HTML using Javascript.
 
 In order for the `server` to have the ability to send messages either back to sender only, or all `client` in that specific room, the socket ID is sent from the `client` to the `server` on every emit:
 
@@ -303,7 +309,7 @@ From `client` to `server`
     - Sends the result back to sender only with the message `joinedQueueCurr`
     - Sends a 'Success' notification to sender only with the message `createToast`
     - Tells all user including the sender to rerender with the message `renderIslandAll`
-    - Sends a notification that a new user has joined the queue to all other users excpet the sender with the message `createToast`
+    - Sends a notification that a new user has joined the queue to all other users except the sender with the message `createToast`
 
 #### leaveQueue
 - `Outbound Data` 
@@ -319,7 +325,7 @@ From `client` to `server`
     - `socket_uuid` The socket ID of the current user (socket)
     - `island_uuid` The UUID of the current island
 - `Server functionalities` 
-    - Server prompt the next group of users to visit the island and update the curr_index of the island that has the same UUID as `island_uuid`
+    - Server prompts the next group of users to visit the island and update the curr_index of the island that has the same UUID as `island_uuid`
     - If everyone in the queue has visited the island and the queue is full, the server prompts the host (sender) to close the island with the message `nextGroupHost`
     - Else, if there is no one on the next visitor list, the server sends a notification to host (sender) with the message `createToast`
     - Tells all user including the sender to update the page with the message `nextGroupAll`
@@ -329,7 +335,7 @@ From `client` to `server`
     - `socket_uuid` The socket ID of the current user (socket)
     - `island_uuid` The UUID of the current island
 - `Server functionalities` 
-    - Server set the island with the same UUID as `island_uuid`'s active status to false and saves the change to database
+    - Server set the island with the same UUID as `island_uuid`'s active status to false and saves the change to the database
     - Sends a 'Success' notification to sender only with the message `createToast`
     - Tells all user including the sender that the island is close with the message `endIslandAll`
     - Send a notification to all user except the sender that the island is now close with the message `createToast`
@@ -352,7 +358,7 @@ From `server` to `client`
 
 #### nextGroupHost
 - `Inbound Data` 
-    - `status` Status of the queue. If everybody in queue has visited and queue is full, return true. Otherwise, false.
+    - `status` Status of the queue. If everybody in the queue has visited and the queue is full, return true. Otherwise, false.
     - `island_uuid` The UUID of the island that the sender is currently on
 - `Client functionalities` 
     - If the status given by `status` is true, create an alert for the host and closes the island when the host confirms
@@ -370,7 +376,7 @@ From `server` to `client`
 - `Inbound Data` 
     - `result` Result return by the server after writing changes to the database
 - `Client functionalities` 
-    - Hide the host control for host
+    - Hide the host control for the host
     - Hide all active island elements from all other users besides the host
     - Set the activity text of the island to 'inactive'
 

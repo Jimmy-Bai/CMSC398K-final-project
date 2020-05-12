@@ -10,14 +10,16 @@
         </div>
         <div class="p-0 card-body text-center">
           <div class="col p-3">
-            <button type="button" class="px-2 py-1 w-100 h6 button button-depth button-color-2 button-active f-700" id="fee-filter">
+            <button type="button" class="px-2 py-1 w-100 h6 button button-depth button-color-2 button-active f-700"
+              id="fee-filter">
               Show Fee Not Required
             </button>
             <button type="button" class="px-2 py-1 w-100 h6 button button-depth button-color-2 button-active f-700"
               id="active-filter">
               Show Active Islands
             </button>
-            <button type="button" class="px-2 py-1 mb-0 w-100 h6 button button-depth button-color-5 f-700" id="clear-filter">
+            <button type="button" class="px-2 py-1 mb-0 w-100 h6 button button-depth button-color-5 f-700"
+              id="clear-filter">
               Clear All Filter
             </button>
           </div>
@@ -54,9 +56,15 @@
   socket = io('/index');
   currUserUuid = {{ uuid }};
 </script>
+{{!-- Set current island UUID list --}}
+<script>
+  {{#each island_uuid_list}}
+  currentIslandList.push(({{this}}).toString());
+  {{/each}}
+</script>
 {{!-- Set width of fixed filter control --}}
 <script>
-  $(function() {
-    $('#filter-control').width( $('.filter-control-col').width());
+  $(function () {
+    $('#filter-control').width($('.filter-control-col').width());
   });
 </script>

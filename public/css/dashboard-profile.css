@@ -28,10 +28,6 @@
   margin-bottom: 0;
 }
 
-.active-island-card a, .inactive-island-card a {
-  color: var(--main-text-secondary) !important;
-}
-
 .active-island-card, .inactive-island-card {
   border: 0 !important;
   /* border-radius: 0 !important; */

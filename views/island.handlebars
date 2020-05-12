@@ -291,6 +291,12 @@
     $('#island-active').removeClass('d-none');
   });
 </script>
+{{!-- Set current island UUID list --}}
+<script>
+  {{#each island_uuid_list}}
+  currentIslandList.push(({{this}}).toString());
+  {{/each}}
+</script>
 {{else}}
 <script>
   $(function () {

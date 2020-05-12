@@ -26,6 +26,40 @@ const TOAST_MSG = {
   'successEndHosting': 'You ahve successfully stop hosting this island.'
 };
 
+// Island list 
+let currentIslandList = [];
+
+// Autocomplete search bar functionality
+$(function () {
+  $("#autocomplete-nav").autocomplete({
+    source: function (request, response) {
+      var limit = $.ui.autocomplete.filter(currentIslandList, request.term);
+      response(limit.slice(0, 10));
+    }
+  }).data('ui-autocomplete')._renderItem = function (ul, item) {
+    var newText = String(item.value).replace(
+      new RegExp(this.term, "gi"),
+      "<span class='ui-state-highlight'>$&</span>");
+
+    return $("<li></li>")
+      .data("ui-autocomplete-item", item)
+      .append("<div>" + newText + "</div>")
+      .appendTo(ul);
+  }
+});
+
+$(function () {
+  $('#search-button').click(function () {
+    var searchTerm = $('#autocomplete-nav').val();
+    var encode = encodeURI(searchTerm);
+    console.log(encode);
+
+    // Sent to app
+    $.get(`/island/${encode}`);
+    window.location.href = `/island/${encode}`;
+  });
+});
+
 // Profile card navbar tab functionality
 $(function () {
   $('#card-navbar a').on('click', function (e) {
@@ -196,7 +230,7 @@ function ClearVisitedIslands(uuid) {
       data: {
         uuid: uuid
       },
-      success: function(data, status) {
+      success: function (data, status) {
         window.location.reload();
         console.log(data);
       }
@@ -213,7 +247,7 @@ function ClearInactiveIslands(uuid) {
       data: {
         uuid: uuid
       },
-      success: function(data, status) {
+      success: function (data, status) {
         window.location.reload();
         console.log(data);
       }
@@ -230,7 +264,7 @@ function ClearAllIslands(uuid) {
       data: {
         uuid: uuid
       },
-      success: function(data, status) {
+      success: function (data, status) {
         window.location.reload();
         console.log(data);
       }
